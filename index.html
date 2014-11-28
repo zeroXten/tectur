@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <title>Tectur.io</title>
+
+  <style type="text/css">
+    body {
+      font: 10pt arial;
+      text-align: center;
+    }
+    #mynetwork {
+      width: 1200px;
+      height: 1000px;
+      border: 0px;
+      margin: 0 auto;
+    }
+  </style>
+  <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" />
+  <script src="http://visjs.org/dist/vis.js"></script>
+
+  <script type="text/javascript">
+
+    var node_config = [
+      {name: 'redis', img: 'redis.png', labels: ['NoSQL','Storage','Database']},
+      {name: 'mongodb', img: 'mongodb.png', labels: ['NoSQL','Storage','Database']},
+      {name: 'cassandra', img: 'cassandra.png', labels: ['NoSQL','Storage','Database']},
+      {name: 'mysql', img: 'mysql.png', labels: ['SQL','Storage','Database', 'RDBMS']},
+      {name: 'postgres', img: 'postgres.png', labels: ['SQL','Storage','Database', 'RDBMS']},
+      {name: 'nginx', img: 'nginx.png', labels: ['Web', 'HTTP', 'Proxy']},
+      {name: 'apache', img: 'apache.png', labels: ['Web', 'HTTP', 'Proxy']},
+      {name: 'lighttpd', img: 'lighttpd.png', labels: ['Web', 'HTTP', 'Proxy']},
+      {name: 'tomcat', img: 'tomcat.png', labels: ['Web', 'HTTP', 'App','Java']},
+      {name: 'jetty', img: 'jetty.png', labels: ['Web', 'HTTP', 'App','Java']},
+      {name: 'rails', img: 'rails.png', labels: ['Web', 'HTTP', 'App','Java']}
+    ];
+
+    var edge_config = [
+      {name: 'data', style: 'arrow', color: 'black', width: 1, labels: ['data','traffic','']},
+      {name: 'data', style: 'arrow', color: 'black', width: 1, labels: ['data','traffic','']},
+      {name: 'data', style: 'arrow', color: 'black', width: 1, labels: ['data','traffic','']},
+      {name: 'bigdata', style: 'arrow', color: 'black', width: 3, labels: ['data','traffic','']},
+      {name: 'secret', style: 'arrow', color: 'red', width: 1, labels: ['secret','encrypted','']},
+      {name: 'connection', style: 'dash-line', color: 'blue', width: 1, labels: ['connection','','']}
+    ];
+
+    var nodes = null;
+    var edges = null;
+    var known_edges = null;
+    var network = null;
+
+    var DIR = 'img/';
+    var LENGTH_MAIN = 150;
+    var LENGTH_SUB = 50;
+
+    // Called when the Visualization API is loaded.
+    function draw() {
+      var number_of_nodes = Math.floor((Math.random() * 5) + 5); // 5 to 10
+      var number_of_edges = Math.floor(1.5 * number_of_nodes);
+      // Create a data table with nodes.
+      nodes = [];
+
+      // Create a data table with links.
+      edges = [];
+      known_edges = [];
+
+      for (i = 0; i < number_of_nodes; i++) {
+        var node = node_config[Math.floor(Math.random()*node_config.length)];
+        var label = node["labels"][Math.floor(Math.random()*node["labels"].length)];
+        nodes.push({id: i, label: label, image: DIR + node["img"], shape: 'image'});
+      }
+      var i = 0;
+      while (i < number_of_edges) {
+        //var edge_length = Math.floor((Math.random() * 100) + 150); // 100 to 250
+        var edge_length = 300;
+        var node1 = nodes[Math.floor(Math.random()*nodes.length)];
+        var node2 = nodes[Math.floor(Math.random()*nodes.length)];
+        var edge = edge_config[Math.floor(Math.random()*edge_config.length)];
+        //var label = edge["labels"][Math.floor(Math.random()*edge["labels"].length)];
+        if ((node1["id"] != node2["id"]) && (known_edges.indexOf(node1["id"]+"-"+node2["id"]) == -1)) {
+          edges.push({from: node1["id"], to: node2["id"], style: edge["style"], length: edge_length, color: edge["color"], width: edge["width"]})
+          known_edges.push(node1["id"]+"-"+node2["id"]);
+          i++;
+        }
+      }
+
+      // create a network
+      var container = document.getElementById('mynetwork');
+      var data = {
+        nodes: nodes,
+        edges: edges
+      };
+      var options = {
+        stabilize: false,   // stabilize positions before displaying
+        configurePhysics: false,
+        physics: {
+          barnesHut: {
+            gravitationalConstant: -4000,
+            springConstant: 0,
+            damping: 0.2
+          }
+        }
+      };
+      network = new vis.Network(container, data, options);
+    }
+  </script>
+</head>
+
+<body onload="draw()">
+
+<h1>Tectur.io</h1>
+<p>Need inspiration </p>
+<div id="mynetwork"></div>
+
+</body>
+</html>
