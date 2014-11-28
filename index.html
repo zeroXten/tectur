@@ -12,7 +12,7 @@
     #mynetwork {
       width: 1000px;
       height: 1000px;
-      border: 0px;
+      border: 1px dashed lightgray;
       margin: 0 auto;
     }
   </style>
@@ -53,7 +53,7 @@
 
     // Called when the Visualization API is loaded.
     function draw() {
-      var number_of_nodes = Math.floor((Math.random() * 5) + 5); // 5 to 10
+      var number_of_nodes = Math.floor((Math.random() * 3) + 5); // 5 to 10
       var number_of_edges = Math.floor(1.5 * number_of_nodes);
       // Create a data table with nodes.
       nodes = [];
@@ -105,7 +105,7 @@
 </head>
 
 <body onload="draw()">
-<div style="background-color:#2980b9; min-width: 100%; min-height: 500px; padding-top: 100px;  padding-bottom: 100px;">
+<div style="background-color:#2980b9; min-width: 100%; min-height: 500px; padding-top: 100px;  padding-bottom: 10px;">
   <div class="row">
     <div class="large-12 columns text-center">
       <h1 style="color: white; font-size: 8em">tectur.io</h1>
@@ -120,7 +120,7 @@
     </div>
   </div>
 </div>
-<div>
+<div style="min-width: 100%; padding-bottom: 100px;">
   <div class="row">
     <div class="large-12 columns text-center">
       <div id="mynetwork"></div>
