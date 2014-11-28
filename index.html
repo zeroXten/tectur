@@ -4,10 +4,6 @@
   <title>Tectur.io</title>
 
   <style type="text/css">
-    body {
-      font: 10pt arial;
-      text-align: center;
-    }
     #mynetwork {
       width: 1200px;
       height: 1000px;
@@ -15,6 +11,8 @@
       margin: 0 auto;
     }
   </style>
+  <link href="/css/foundation.min.css" rel="stylesheet" type="text/css" />
+  <script src="/js/foundation.min.js"></script>
   <link href="http://visjs.org/dist/vis.css" rel="stylesheet" type="text/css" />
   <script src="http://visjs.org/dist/vis.js"></script>
 
@@ -106,10 +104,34 @@
 </head>
 
 <body onload="draw()">
-
-<h1>Tectur.io</h1>
-<p>Need inspiration </p>
-<div id="mynetwork"></div>
-
+<div style="background-color:#2980b9; min-width: 100%; min-height: 500px; padding-top: 100px;  padding-bottom: 100px;">
+  <div class="row">
+    <div class="large-12 columns text-center">
+      <h1>Tectur.io</h1>
+      <h2 style="color: white">Need inspiration for your startup's Distributed Big-Data Web-Scale Cloud platform SaaS App architecture?</h2>
+    </div>
+  </div>
+</div>
+<div style="min-width: 100%; min-height: 200px; padding-top: 50px; padding-bottom: 50px;">
+  <div class="row">
+    <div class="large-12 columns text-center">
+      <a href="#" class="button" onclick="draw()">Refresh for more inspiration!</a>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="row">
+    <div class="large-12 columns text-center">
+      <div id="mynetwork"></div>
+    </div>
+  </div>
+</div>
+<div style="background-color:#2980b9; min-width: 100%; min-height: 100px; padding-top: 10px;  padding-bottom: 10px;">
+  <div class="row">
+    <div class="large-12 columns text-center">
+      <p>Made by...</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
