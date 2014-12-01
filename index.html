@@ -26,17 +26,12 @@
     Azure
     ActiveMQ
     Firewall
-    AppDynamics
     SAP
-    LinkedIn
     Twitter
     Packer
-    OpenStack
     Ansible
-    Chef
     Puppet
     SaltStack
-    Zookeeper
     etcd
     Logstash
     Statsd
@@ -64,19 +59,25 @@
       {name: 'user', img: 'user.png', labels: ['User', 'Admin', 'Client', 'Supplier']},
       {name: 'users', img: 'users.png', labels: ['Users', 'Admins', 'Clients', 'Suppliers']},
       {name: 'influxdb', img: 'influxdb.png', labels: ['Metrics', 'Stats', 'Data', 'Graphs']},
-      {name: 'newrelic', img: 'newrelic.png', labels: ['Monitoring', 'Metrics', 'Stats', 'Data', 'Graphs']},
+      {name: 'newrelic', img: 'newrelic.png', labels: ['Monitoring', 'Metrics', 'Stats', 'Data', 'Graphs', 'Performance']},
+      {name: 'monitorus', img: 'monitorus.png', labels: ['Monitoring', 'Metrics', 'Stats', 'Data', 'Graphs', 'Performance']},
       {name: 'cisco', img: 'cisco.png', labels: ['Network', 'Networking', 'Switch Fabric']},
       {name: 'salesforce', img: 'salesforce.png', labels: ['CRM', 'Customers']},
       {name: 'akamai', img: 'akamai.png', labels: ['CDN', 'Edge', 'WAF']},
-      {name: 'docker', img: 'docker.png', labels: ['Infrastructure', 'Containers', 'Virtual']},
-      {name: 'heroku', img: 'heroku.png', labels: ['Infrastructure', 'Containers', 'Virtual']},
+      {name: 'docker', img: 'docker.png', labels: ['Infrastructure', 'IaaS', 'Containers', 'Virtual']},
+      {name: 'heroku', img: 'heroku.png', labels: ['Infrastructure', 'IaaS', 'Containers', 'Virtual']},
+      {name: 'openstack', img: 'openstack.png', labels: ['Infrastructure', 'IaaS', 'Containers', 'Virtual']},
       {name: 'rabbitmq', img: 'rabbitmq.png', labels: ['Message Queue', 'Pipe']},
       {name: 'nagios', img: 'nagios.png', labels: ['Monitoring', 'Metrics', 'Alerting', 'Notifications']},
       {name: 'pagerduty', img: 'pagerduty.png', labels: ['Alerting', 'Notifications']},
+      {name: 'runscope', img: 'runscope.png', labels: ['Monitoring', 'Testing', 'Notifications']},
       {name: 'opsgenie', img: 'opsgenie.png', labels: ['Alerting', 'Notifications']},
       {name: 'sensu', img: 'sensu.png', labels: ['Monitoring', 'Metrics', 'Alerting', 'Notifications']},
       {name: 'facebook', img: 'facebook.png', labels: ['Social', 'API']},
-      {name: 'linkedin', img: 'linkedin.png', labels: ['Social', 'API']}
+      {name: 'linkedin', img: 'linkedin.png', labels: ['Social', 'API']},
+      {name: 'appdynamics', img: 'appdynamics.png', labels: ['Monitoring', 'Metrics', 'Stats', 'Data', 'Graphs', 'Performance']},
+      {name: 'getchef', img: 'getchef.png', labels: ['Config', 'Build', 'Config Management']},
+      {name: 'zookeeper', img: 'zookeeper.png', labels: ['Service Discovery', 'Configuration', 'Syncronization']}
     ];
 
     var edge_config = [
@@ -113,9 +114,9 @@
       while (i < number_of_nodes) {
         var node = node_config[Math.floor(Math.random()*node_config.length)];
         var label = node["labels"][Math.floor(Math.random()*node["labels"].length)];
-        if (known_nodes.indexOf(node["name"]) == -1) {
+        if (known_nodes.indexOf(node["name"]+"-"+label) == -1) {
           nodes.push({id: i, label: label, image: DIR + node["img"], shape: 'image'});
-          known_nodes.push(node["name"]);
+          known_nodes.push(node["name"]+"-"+label);
           i++;
         }
       }
