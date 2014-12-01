@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Tectur.io</title>
+  <title>tectur.io</title>
 
   <link href="/css/foundation.min.css" rel="stylesheet" type="text/css" />
   <script src="/js/foundation.min.js"></script>
@@ -16,7 +16,44 @@
       margin: 0 auto;
     }
   </style>
+  <!--
+    TODO - Logos for:
 
+    Pagerduty
+    OpsGenie
+    Sensu
+    Graphite
+    InfluxDB
+    Riemann
+    Nagios
+    Apigee
+    Rackspace
+    Azure
+    RabbitMQ
+    ActiveMQ
+    Firewall
+    AppDynamics
+    SAP
+    LinkedIn
+    Facebook
+    Twitter
+    Packer
+    Docker
+    OpenStack
+    Heroku
+    Ansible
+    Chef
+    Puppet
+    SaltStack
+    Zookeeper
+    etcd
+    Logstash
+    Statsd
+    Zabbix
+    Runscope
+    Ganglia
+    Logster
+  -->
   <script type="text/javascript">
 
     var node_config = [
@@ -30,7 +67,15 @@
       {name: 'lighttpd', img: 'lighttpd.png', labels: ['Web', 'HTTP', 'Proxy']},
       {name: 'tomcat', img: 'tomcat.png', labels: ['Web', 'HTTP', 'App','Java']},
       {name: 'jetty', img: 'jetty.png', labels: ['Web', 'HTTP', 'App','Java']},
-      {name: 'rails', img: 'rails.png', labels: ['Web', 'HTTP', 'App','Java']}
+      {name: 'rails', img: 'rails.png', labels: ['Web', 'HTTP', 'App','Ruby']},
+      {name: 'aws', img: 'aws.png', labels: ['Cloud', 'IaaS', 'Infrastructure']},
+      {name: 'cloud', img: 'cloud.png', labels: ['Cloud', 'IaaS', 'Infrastructure']},
+      {name: 'user', img: 'user.png', labels: ['User', 'Admin', 'Client', 'Supplier']},
+      {name: 'users', img: 'users.png', labels: ['Users', 'Admins', 'Clients', 'Suppliers']},
+      {name: 'newrelic', img: 'newrelic.png', labels: ['Monitoring', 'Metrics', 'Stats']},
+      {name: 'cisco', img: 'cisco.png', labels: ['Network', 'Networking', 'Switch Fabric']},
+      {name: 'salesforce', img: 'salesfoce.png', labels: ['CRM', 'Customers' ]},
+      {name: 'akamai', img: 'akamai.png', labels: ['CDN', 'Edge', 'WAF' ]}
     ];
 
     var edge_config = [
@@ -53,21 +98,28 @@
 
     // Called when the Visualization API is loaded.
     function draw() {
-      var number_of_nodes = Math.floor((Math.random() * 3) + 5); // 5 to 10
+      var number_of_nodes = Math.floor((Math.random() * 3) + 4); // 4 to 7
       var number_of_edges = Math.floor(1.5 * number_of_nodes);
       // Create a data table with nodes.
       nodes = [];
+      known_nodes = [];
 
       // Create a data table with links.
       edges = [];
       known_edges = [];
 
-      for (i = 0; i < number_of_nodes; i++) {
+      var i = 0;
+      while (i < number_of_nodes) {
         var node = node_config[Math.floor(Math.random()*node_config.length)];
         var label = node["labels"][Math.floor(Math.random()*node["labels"].length)];
-        nodes.push({id: i, label: label, image: DIR + node["img"], shape: 'image'});
+        if (known_nodes.indexOf(node["name"]) == -1) {
+          nodes.push({id: i, label: label, image: DIR + node["img"], shape: 'image'});
+          known_nodes.push(node["name"]);
+          i++;
+        }
       }
-      var i = 0;
+
+      i = 0;
       while (i < number_of_edges) {
         //var edge_length = Math.floor((Math.random() * 100) + 150); // 100 to 250
         var edge_length = 300;
@@ -113,7 +165,7 @@
     </div>
   </div>
 </div>
-<div style="min-width: 100%; min-height: 200px; padding-top: 50px; padding-bottom: 50px;">
+<div style="min-width: 100%; padding-top: 50px; padding-bottom: 50px">
   <div class="row">
     <div class="large-12 columns text-center">
       <a href="javascript:void(0);" class="button success" onclick="draw()">Refresh for more inspiration!</a>
@@ -127,7 +179,7 @@
     </div>
   </div>
 </div>
-<div style="background-color:#2980b9; min-width: 100%; min-height: 100px; padding-top: 10px;  padding-bottom: 10px;">
+<div style="background-color:#2980b9; min-width: 100%; min-height: 100px; padding-bottom: 10px;">
   <div class="row">
     <div class="large-12 columns text-center">
       <p style="color: white">Made by <a style="color:white" href="https://www.twitter.com/zeroXten">@zeroXten</a> with mild agitation somewhere just outside of London.</p>
